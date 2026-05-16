@@ -1,9 +1,18 @@
 using System.Reflection;
 using FinLayer.Api.Auth;
 using FinLayer.API.Auth;
+using Microsoft.AspNetCore.HttpOverrides;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 builder.Services.AddOpenApi(o =>
 {
     o.AddDocumentTransformer<AuthSecuritySchemeTransformer>();
@@ -27,6 +36,8 @@ builder.Services
     .AddControllers();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 if (app.Environment.IsDevelopment())
 {
