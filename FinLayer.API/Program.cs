@@ -1,6 +1,8 @@
 using System.Reflection;
 using FinLayer.Api.Auth;
 using FinLayer.API.Auth;
+using FinLayer.Application;
+using FinLayer.Infrastructure;
 using Microsoft.AspNetCore.HttpOverrides;
 using Scalar.AspNetCore;
 
@@ -33,6 +35,8 @@ if (environmentName == "Development")
 builder.Services
     .AddApiAuthentication(builder.Configuration)
     .AddApiAuthorization()
+    .AddPersistence(builder.Configuration)
+    .AddFinLayerApplication()
     .AddControllers();
 
 var app = builder.Build();

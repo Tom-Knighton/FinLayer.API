@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FinLayer.Domain\FinLayer.Domain.csproj" />
+      <ProjectReference Include="..\FinLayer.Infrastructure\FinLayer.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
